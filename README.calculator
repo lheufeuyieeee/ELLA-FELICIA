@@ -1,1 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Pseudocode: Style of the margin, padding and box-sizing */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* Pseudocode: Style the body to set background, display, alignment and sizing */
+        body {
+            min-height: 100vh;
+            background: gray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        /* Pseudocode" Style the Calculator container */
+        }
+        .calculator {
+            width: 350px;
+            height: 500px;
+            box-shadow: 15px 15px 15px black;
+            border-radius: 12px;
+            background: pink;
+            overflow: hidden;
+        }
+        /* Pseudocode: Style of the input screen area and colors */
+        input.screen {
+            width: 120%;
+            height: 150px;
+            border: black;
+            border-width: 25px 25px 25px 25px;
+            border-radius: 10px;
+            font-size: 2rem;
+            padding: 3rem;
+            color: black;
+            background: white;
+            text-align: left;
+            pointer-events: none;
+        }
+        /* Pseudocode: Style of the buttons */
+        .button {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 23px;
+        }
+        /* Pseudocode: Style the button area */
+        button {
+            flex: 0 0 22%;
+            margin: 5px 0;
+            border: 2px solid #000;
+            width: 60px;
+            height: 52px;
+            font-size: 22px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        /* Pseudocode: Style of the btn-yellow to set background and color */
+        .btn-yellow {
+            background: rgb(245, 146, 62);
+            color: #fff;
+        }
+        /* Pseudocode: Style of the btn-grey to set background and color */
+        .btn-grey {
+            background: white;
+            color: #000;
+        }
+        /* Pseudocode: Style of the btn-equal to set background and color */
+        .btn-equal {
+            background: green;
+            color: #fff;
+        }
+        /* Pseudocode: Style of the btn-clear to set background and color */
+        .btn-clear {
+            background: red;
+            color: #fff;
+        }
+        .btn-special {
+            background-color: blanchedalmond;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <!-- Pseudocode: input buttons to set i the calculator -->
+    <section class="calculator">
+        <input type="text" class="screen" readonly>
+        <div class="button">
+            <button type="button" class="btn btn-yellow" data-num="*">x</button>
+            <button type="button" class="btn btn-yellow" data-num="/">÷</button>
+            <button type="button" class="btn btn-yellow" data-num="-">-</button>
+            <button type="button" class="btn btn-yellow" data-num="+">+</button>
+            <button type="button" class="btn btn-grey" data-num="1">1</button>
+            <button type="button" class="btn btn-grey" data-num="2">2</button>
+            <button type="button" class="btn btn-grey" data-num="3">3</button>
+            <button type="button" class="btn btn-clear">C</button>
+            <button type="button" class="btn btn-grey" data-num="4">4</button>
+            <button type="button" class="btn btn-grey" data-num="5">5</button>
+            <button type="button" class="btn btn-grey" data-num="6">6</button>
+            <button type="button" class="btn btn-grey" data-num="7">7</button>
+            <button type="button" class="btn btn-grey" data-num="8">8</button>
+            <button type="button" class="btn btn-grey" data-num="9">9</button>
+            <button type="button" class="btn btn-grey" data-num="0">0</button>
+            <button type="button" class="btn btn-grey" data-num=".">.</button>
+            <button type="button" class="btn btn-equal">=</button>
+
+   </div>
+</section>
+
+<script>
+    (function() {
+        let screen = document.querySelector('.screen');
+        let buttons = document.querySelectorAll('.btn[data-num]');
+        let clear = document.querySelector('.btn-clear');
+        let equal = document.querySelector('.btn-equal');
+
+        buttons.forEach(function(button) {
+            button.addEventListener('click', function(e) {
+                screen.value += e.target.dataset.num;
+            });
+        });
+
+
+        equal.addEventListener('click', function() {
+            try {
+                screen.value = eval(screen.value.replace(/[^-()\d/*+.]/g, ''));
+            } catch (error) {
+                screen.value = "Error";
+            }
+        });
+
+        clear.addEventListener('click', function() {
+            screen.value = "";
+        });
+    })();
+</script>
+</body>
+</html>
 
